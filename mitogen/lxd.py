@@ -60,11 +60,12 @@ class Stream(mitogen.parent.Stream):
         self.name = u'lxd.' + self.container
 
     def get_boot_command(self):
+        container_name = self.container.split('.', 1)[0]
         bits = [
             self.lxc_path,
             'exec',
             '--force-noninteractive',
-            self.container,
+            container_name,
             '--',
         ]
         return bits + super(Stream, self).get_boot_command()
